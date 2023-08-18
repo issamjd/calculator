@@ -1,10 +1,11 @@
+@import url('https://fonts.cdnfonts.com/css/seven-segment');
 *{
     padding: 0;
     margin: 0;
 }
 
 .display{
-    width: 32vw;
+    width: 32vh;
     height: 8vh;
     border: 2px black solid;
     border-radius: 5px;
@@ -14,18 +15,24 @@
 }
 .display > p{
     padding: 15px;
-    font-size: large;
     line-height: 30%;
-    font-weight: bold;
+    font-family: 'Seven Segment', sans-serif;
+
+}
+.display>p:first-child{
+    font-size: 1.25rem;
+}
+.display>p:last-child{
+    font-size: 2.5rem;
 }
 .operBtns{
     display: grid;
-    grid-template-columns: repeat(4, 8vw);
+    grid-template-columns: repeat(4, 8vh);
     grid-template-rows: repeat(4, 8vh);
 }
 .backBtns{
     display: grid;
-    grid-template-columns: repeat(2, 16vw);
+    grid-template-columns: repeat(2, 16vh);
     grid-template-rows: repeat(1, 8vh);
 }
 button{
@@ -50,4 +57,13 @@ button:hover{
     margin-top: 10vh;
     margin-bottom: 10vh;
     background-color: gray;
+}
+
+.controlBtns{
+    font-size: 1.5rem;
+}
+
+.orng{
+    /* background-color: rgb(228, 107, 107); */
+    font-weight: 900;
 }

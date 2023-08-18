@@ -7,38 +7,58 @@ $(function(){
     let computeFlag = false
     let result = 0
     let operand = ""
+    let upperDisplay = $("#result")
+    let lowerDisplay = $("#currentOp");
 
     $(".controlBtns").click(function(){
         currInput = $(this).text()
 
-        if (!isNaN(parseInt(currInput)) || (currInput == ".")&&firstDec){
-            inputNbs.push(currInput)
-            concatNbs += inputNbs[inputNbs.length-1];
-            console.log(concatNbs)
-            if(currInput == "."){
-                firstDec = false;
+        if (!isNaN(parseInt(currInput)) || (currInput == ".")&&firstDec || currInput == "DEL"){
+            if (currInput != "DEL"){
+                inputNbs.push(currInput)
+                concatNbs += inputNbs[inputNbs.length-1];
+                lowerDisplay.text(concatNbs)
+                if(currInput == "."){
+                    firstDec = false;
+                }
+            }
+            else{
+                concatNbs = concatNbs.slice(0, concatNbs.length - 1);
+                inputNbs.pop();
+                lowerDisplay.text(concatNbs)
             }
         }
         else{
+            if(currInput == "AC"){
+                concatNbs = ""
+                inputNbs = []
+                currInput = ""
+                firstDec = true
+                operator = ""
+                computeFlag = false
+                result = 0
+                operand = ""
+                lowerDisplay.text("0")
+                upperDisplay.text(" ")
+            }
+
             if(computeFlag == true){
                 switch(operator){
                     case "+":
                         result = parseFloat(operand) + parseFloat(concatNbs)
-                        console.log(result)
                         break;
                     case "-":
                         result = parseFloat(operand) - parseFloat(concatNbs)
-                        console.log(result)
                         break;
                     case "x":
                         result = parseFloat(operand) * parseFloat(concatNbs)
-                        console.log(result)
                         break;
                     case "/":
                         result = parseFloat(operand) / parseFloat(concatNbs)
-                        console.log(result)
                         break;
                 }
+                upperDisplay.text(operand +" "+ operator +" "+ concatNbs)
+                lowerDisplay.text(result)
                 computeFlag = false
                 operand = result;
             }
@@ -52,12 +72,12 @@ $(function(){
             concatNbs = ""
             firstDec = true
 
-            if(currInput != "."){
+            if(currInput !== "." && currInput !== "DEL" && currInput !== "AC" && currInput !== "="){
                 operator = $(this).text()
                 computeFlag = true
+                upperDisplay.text(operand +" "+ operator);
             }
         }
-        
         
 
     })
